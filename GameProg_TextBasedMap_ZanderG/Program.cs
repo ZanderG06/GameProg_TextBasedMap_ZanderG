@@ -10,7 +10,7 @@ namespace GameProg_TextBasedMap_ZanderG
     {
         static void Main(string[] args)
         {
-
+            DisplayMap();
         }
 
         static char[,] map = new char[,] // dimensions defined by following data:
@@ -31,9 +31,9 @@ namespace GameProg_TextBasedMap_ZanderG
 
         static void DisplayMap()
         {
-            for(int i = 0; i < map.Length; i++)
+            for(int i = 0; i < map.GetLength(0); i++)
             {
-                for(int j = 0; j < map.Length; j++)
+                for(int j = 0; j < map.GetLength(1); j++)
                 {
                     Console.Write(map[i, j]);
                 }

@@ -10,14 +10,34 @@ namespace GameProg_TextBasedMap_ZanderG
     {
         static void Main(string[] args)
         {
-            DisplayMap(3);
+            bool isPlaying = true;
+            
+            while(isPlaying == true)
+            {
+                Console.WriteLine("How much do you wanna scale your map?");
+                Console.WriteLine("(WARNING: Anything past 3 has not been tested and could slow down your pc)");
+                string playerInput = Console.ReadLine();
 
-            Console.WriteLine(" ");
-            Console.WriteLine("map legend:");
-            Console.WriteLine("^ = mountain");
-            Console.WriteLine("` = grass");
-            Console.WriteLine("~ = water");
-            Console.WriteLine("* = trees");
+                if (int.TryParse(playerInput, out int result))
+                {
+                    int playerInputInt = int.Parse(playerInput);
+
+                    if (playerInputInt <= 0)
+                    {
+
+                    }
+                    else if (playerInputInt == 1)
+                    {
+                        DisplayMap();
+                        Legend();
+                    }
+                    else
+                    {
+                        DisplayMap(playerInputInt);
+                        Legend();
+                    }
+                }
+            }
         }
 
         static char[,] map = new char[,] // dimensions defined by following data:
@@ -47,7 +67,25 @@ namespace GameProg_TextBasedMap_ZanderG
                 Console.Write("░");
                 for (int j = 0; j < map.GetLength(1); j++)
                 {
+                    if (map[i, j] == '`')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    else if (map[i, j] == '~')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                    }
+                    else if (map[i, j] == '*')
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    }
+                    else if (map[i, j] == '^')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+
                     Console.Write(map[i, j]);
+                    Console.ResetColor();
                 }
                 Console.Write("░");
                 Console.Write("\n");
@@ -96,6 +134,16 @@ namespace GameProg_TextBasedMap_ZanderG
                 }
             }
             for (int i = 0; i < map.GetLength(1) * scale + 2; i++) Console.Write("░");
+        }
+
+        static void Legend()
+        {
+            Console.WriteLine(" ");
+            Console.WriteLine("map legend:");
+            Console.WriteLine("^ = mountain");
+            Console.WriteLine("` = grass");
+            Console.WriteLine("~ = water");
+            Console.WriteLine("* = trees");
         }
     }
 }

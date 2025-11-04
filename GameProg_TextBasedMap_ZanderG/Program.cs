@@ -10,7 +10,14 @@ namespace GameProg_TextBasedMap_ZanderG
     {
         static void Main(string[] args)
         {
-            DisplayMap();
+            DisplayMap(3);
+
+            Console.WriteLine(" ");
+            Console.WriteLine("map legend:");
+            Console.WriteLine("^ = mountain");
+            Console.WriteLine("` = grass");
+            Console.WriteLine("~ = water");
+            Console.WriteLine("* = trees");
         }
 
         static char[,] map = new char[,] // dimensions defined by following data:
@@ -31,22 +38,43 @@ namespace GameProg_TextBasedMap_ZanderG
 
         static void DisplayMap()
         {
+            for(int i = 0; i < map.GetLength(1)+2; i++) Console.Write("░");
+
+            Console.Write("\n");
+            
             for(int i = 0; i < map.GetLength(0); i++)
             {
-                for(int j = 0; j < map.GetLength(1); j++)
+                Console.Write("░");
+                for (int j = 0; j < map.GetLength(1); j++)
                 {
                     Console.Write(map[i, j]);
                 }
+                Console.Write("░");
                 Console.Write("\n");
             }
+            for (int i = 0; i < map.GetLength(1) + 2; i++) Console.Write("░");
         }
 
-        // usage: map[y, x]
+        static void DisplayMap(int scale)
+        {
+            for (int i = 0; i < map.GetLength(1) * scale + 2; i++) Console.Write("░");
 
-        // map legend:
-        // ^ = mountain
-        // ` = grass
-        // ~ = water
-        // * = trees
+            Console.Write("\n");
+
+            for (int i = 0; i < map.GetLength(0); i++)
+            {
+                for (int l = 0; l < scale; l++)
+                {
+                    Console.Write("░");
+                    for (int j = 0; j < map.GetLength(1); j++)
+                    {
+                        for (int m = 0; m < scale; m++) Console.Write(map[i, j]);
+                    }
+                    Console.Write("░");
+                    Console.Write("\n");
+                }
+            }
+            for (int i = 0; i < map.GetLength(1) * scale + 2; i++) Console.Write("░");
+        }
     }
 }

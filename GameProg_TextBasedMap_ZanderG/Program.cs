@@ -68,7 +68,28 @@ namespace GameProg_TextBasedMap_ZanderG
                     Console.Write("░");
                     for (int j = 0; j < map.GetLength(1); j++)
                     {
-                        for (int m = 0; m < scale; m++) Console.Write(map[i, j]);
+                        for (int m = 0; m < scale; m++)
+                        {
+                            if (map[i, j] == '`')
+                            {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                            }
+                            else if (map[i, j] == '~')
+                            {
+                                Console.ForegroundColor = ConsoleColor.Blue;
+                            }
+                            else if (map[i, j] == '*')
+                            {
+                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                            }
+                            else if (map[i, j] == '^')
+                            {
+                                Console.ForegroundColor = ConsoleColor.Gray;
+                            }
+
+                            Console.Write(map[i, j]);
+                            Console.ResetColor();
+                        }
                     }
                     Console.Write("░");
                     Console.Write("\n");
